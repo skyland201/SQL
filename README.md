@@ -144,5 +144,69 @@ ORDER BY COUNT(*) DESC
 LIMIT 1;
 
 >Cevap=44	60
+## Ödev8
+-test veritabanınızda employee isimli sütun bilgileri id(INTEGER), name VARCHAR(50), birthday DATE, email VARCHAR(100) olan bir tablo oluşturalım.
+>CREATE TABLE employee (
+  id Serial PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100),
+  birthday DATE
+);
+- Oluşturduğumuz employee tablosuna 'Mockaroo' servisini kullanarak 50 adet veri ekleyelim.
+>insert into employee (id, name, email, birthday) values (1, 'Modesta', 'msquibbs0@tinypic.com', '2002/01/06');
+insert into employee (id, name, email, birthday) values (2, 'Arden', 'abeckey1@wordpress.org', '2020/06/08');
 
+> veri eklendi
+- Sütunların her birine göre diğer sütunları güncelleyecek 5 adet UPDATE işlemi yapalım.
+> Update 1
+>UPDATE employee 
+>SET name = 'Hüseyin'
+>WHERE id = 1;
 
+> Update 2
+>UPDATE employee 
+>SET email = 'test@test.com'
+>WHERE birthday > '1996-03-16';
+
+> Update 3
+UPDATE employee 
+SET birthday = '1992-11-14'
+WHERE name ILIKE 'H%';
+
+>Update 4
+UPDATE employee 
+SET email = 'update4@gmail.com'
+WHERE id > 45
+RETURNING *;
+
+>Update 5
+UPDATE employee 
+SET name = CONCAT(name,' GMAIL')
+WHERE email LIKE '%@gmail.com'
+RETURNING *;
+- Sütunların her birine göre ilgili satırı silecek 5 adet DELETE işlemi yapalım.
+
+-- DELETE 1
+DELETE FROM employee
+WHERE email LIKE '%@java.com'
+;
+
+-- DELETE 2
+DELETE FROM employee
+WHERE id IN(16,17,18)
+;
+
+-- DELETE 3
+DELETE FROM employee
+WHERE id BETWEEN 5 AND 12
+;
+
+-- DELETE 4
+DELETE FROM employee
+WHERE birthday < '"2000-06-08"'
+;
+
+-- DELETE 5
+DELETE FROM employee
+WHERE name LIKE 'ınge%'
+;
