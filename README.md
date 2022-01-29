@@ -98,4 +98,6 @@ LIMIT 5;
 WHERE store_id=1
 ORDER BY last_name
 LIMIT 4;
+## Ödev6
+
 
