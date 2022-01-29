@@ -99,5 +99,29 @@ WHERE store_id=1
 ORDER BY last_name
 LIMIT 4;
 ## Ödev6
+Aşağıdaki sorgu senaryolarını dvdrental örnek veri tabanı üzerinden gerçekleştiriniz.
+- film tablosunda bulunan rental_rate sütunundaki değerlerin ortalaması nedir?
+>SELECT AVG(rental_rate) from film
+;
+
+> Cevap=2.98
+- film tablosunda bulunan filmlerden kaç tanesi 'C' karakteri ile başlar?
+>SELECT COUNT(title) from film
+WHERE title LIKE 'C%';
+
+>Cevap=92
+- film tablosunda bulunan filmlerden rental_rate değeri 0.99 a eşit olan en uzun (length) film kaç dakikadır?
+> SELECT length from film where rental_rate=0.99
+order by film.length
+desc
+limit 1
+;
+
+> Cevap=184
+- film tablosunda bulunan filmlerin uzunluğu 150 dakikadan büyük olanlarına ait kaç farklı replacement_cost değeri vardır?
+>SELECT count(distinct replacement_cost) from film where film.length>150
+;
+
+>Cevap=21
 
 
