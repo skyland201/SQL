@@ -302,3 +302,39 @@ EXCEPT ALL
 SELECT  first_name 
 FROM customer
 );
+## Ödev12
+Aşağıdaki sorgu senaryolarını dvdrental örnek veri tabanı üzerinden gerçekleştiriniz.
+-film tablosunda film uzunluğu length sütununda gösterilmektedir. Uzunluğu ortalama film uzunluğundan fazla kaç tane film vardır?
+>Select count(length) 
+from film
+where length > (
+select avg(length)
+from film
+);
+
+>Cevap: 489
+- film tablosunda en yüksek rental_rate değerine sahip kaç tane film vardır?
+> Select count(title) 
+from film
+where  rental_rate= (
+select max(rental_rate)
+from film
+);
+- film tablosunda en düşük rental_rate ve en düşük replacement_cost değerlerine sahip filmleri sıralayınız.
+> Select title 
+from film
+where  rental_rate= (
+select min(rental_rate)
+from film
+)
+and replacement_cost=(
+select min(replacement_cost)
+from film
+);
+- payment tablosunda en fazla sayıda alışveriş yapan müşterileri(customer) sıralayınız.
+> Select customer_id 
+from payment
+where  amount= (
+select max(amount)
+from payment
+);
