@@ -338,3 +338,42 @@ where  amount= (
 select max(amount)
 from payment
 );
+## Genel Tekrar
+Bu çalışmamamızda şimdiye kadar üzerine konuştuğumuz tüm konuları 5 farklı senaryo üzerinden tekrar etmeye çalıştık. Aşağıda ilgili senaryoları bulabilirsiniz.
+- film tablosundan 'K' karakteri ile başlayan en uzun ve replacenet_cost u en düşük 4 filmi sıralayınız.
+> Select title 
+from film
+where  title like 'K%' and replacement_cost=(
+select min(replacement_cost)
+from film
+)
+order by length desc
+limit 4;
+;
+- film tablosunda içerisinden en fazla sayıda film bulunduran rating kategorisi hangisidir?
+> Select rating,count(title) 
+from film
+group by rating
+order by count(title) desc
+limit 1;
+;
+- cutomer tablosunda en çok alışveriş yapan müşterinin adı nedir?
+> Select first_name,last_name,max(amount) 
+from customer
+inner join payment on payment.customer_id=customer.customer_id 	  
+group by first_name,last_name 
+order by max(amount) desc
+limit 1
+;
+- category tablosundan kategori isimlerini ve kategori başına düşen film sayılarını sıralayınız.
+> Select category.name,count(category.name) 
+from film_category
+inner join category on film_category.category_id=category.category_id
+inner join film on  film_category.film_id=film.film_id
+group by category.name
+;
+- film tablosunda isminde en az 4 adet 'e' veya 'E' karakteri bulunan kç tane film vardır?
+>Select count(title) 
+from film
+where title ilike '%e%%e%%e%%e%'
+;
